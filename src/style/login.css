@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.login {
+  display: flex;
+}
+
+.login img {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  left: 7vw;
+  top: 15vh;
+}
+
+.middle-line {
+  position: absolute;
+  width: 990px;
+  /* height: 500px; */
+  /* margin-left: -3px; */
+  top: 25vh;
+  left: 10vw;
+  border: 1px solid rgba(172, 172, 172, 0.5);
+  transform: rotate(90deg);
+}
