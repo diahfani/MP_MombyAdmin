@@ -1,8 +1,24 @@
 import { Container } from 'react-bootstrap'
 import image from '../images/2853458.jpg'
+import React, { useState } from 'react'
 import '../style/login.css'
 
-export default function login(){
+export default function Login(){
+    const [username, setusername] = useState("")
+    const [password, setpassword] = useState("")
+
+    const handleChangeUsername = (e) => {
+        setusername({...username, [e.target.name]: e.target.value})
+    }
+
+    const handleChangePassword = (e) => {
+        setpassword({...password, [e.target.name]: e.target.value})
+    }
+
+    const handleSubmit = () => {
+
+    }
+
     return (
         <>
             <div className="login">
@@ -10,15 +26,15 @@ export default function login(){
                     <img src={image} alt="ini background"></img>
                 </div>
                 <div className="middle-line"></div>
-                <Container className="container-form">
+                <Container className="ctr-form">
                     <h3>Login as Admin</h3>
                     <hr/>
                     <br/>
                     <Container>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                         {/* <TextField id="demo-helper-text-misaligned-no-helper" label="Username" /> */}
-                        <input id="username" type="text" name="username" placeholder="Username" className="input"></input> <br/>
-                        <input id="password" type="password" name="password" placeholder="Password" className="input"></input> <br/>
+                        <input id="username" type="text" value={username} onChange={handleChangeUsername} name="username" placeholder="Username" className="input-form"></input> <br/>
+                        <input id="password" type="password" value={password} onChange={handleChangePassword} name="password" placeholder="Password" className="input-form"></input> <br/>
                         <button className="span-form">Login</button>
                         </form>
                         {/* <span className="span-text-bottom-contact">Contact to dev@aol.com</span> */}

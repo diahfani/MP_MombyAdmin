@@ -3,12 +3,13 @@
 // import { BrowserRouter, Routes, Route } from 'Ro'
 import Login from './pages/login';
 import Sidebar from './component/Sidebar';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import $ from 'jquery';
-import Popper from 'popper.js';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import $ from 'jquery';
+// import Popper from 'popper.js';
 
 function App() {
   return (
+
     // <Login></Login>
     <Sidebar></Sidebar>
     // <div className="App">
