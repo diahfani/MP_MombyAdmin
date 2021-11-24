@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0 auto;
   padding: 0;
 }
@@ -20,10 +20,84 @@
 .middle-line {
   position: absolute;
   width: 990px;
-  /* height: 500px; */
-  /* margin-left: -3px; */
   top: 25vh;
   left: 10vw;
-  border: 1px solid rgba(172, 172, 172, 0.5);
+  border: 0.2px solid rgba(172, 172, 172, 0.5);
   transform: rotate(90deg);
+}
+
+.container-form {
+  margin-top: 20vh;
+  margin-left: 32vw;
+}
+
+.login h3 {
+  text-align: center;
+  width: 275px;
+  height: 54px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 54px;
+  color: #0e483f;
+}
+
+.login hr {
+  width: 30px;
+  color: #0e483f;
+}
+
+.input {
+  height: 40px;
+  width: 300px;
+  border-radius: 20px;
+  border: 1px solid #acacac;
+  margin: 10px;
+  padding-left: 20px;
+  box-sizing: border-box;
+  border-radius: 40px;
+}
+
+.span-form {
+  width: 300px;
+  height: 40px;
+  margin-left: 10px;
+  margin-top: 30px;
+  color: #eaf6f5;
+  background: #0e483f;
+  border-radius: 40px;
+  border: none;
+  font-size: 18px;
+  transition: all 0.5s ease-out;
+}
+
+.span-form:hover,
+.span-form:focus {
+  background: #06201c;
+}
+
+.container-text {
+  margin: 20px;
+}
+
+.span-text-bottom {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 33px;
+  align-items: center;
+  margin-left: 67px;
+  color: #0e483f;
+  /* margin: 20px; */
+}
+
+.span-text-bottom-contact {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 33px;
+  align-items: center;
+  margin-left: 38px;
+  color: #0e483f;
+  /* margin: 20px; */
 }
