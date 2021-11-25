@@ -1,13 +1,18 @@
 import { Container } from 'react-bootstrap'
 import image from '../images/2853458.jpg'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../style/login.css'
+import { useHistory } from 'react-router-dom';
+import { auth, signInWithEmailAndPassword } from '../firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
+
 
 export default function Login(){
-    // const [username, setusername] = useState("")
-    // const [password, setpassword] = useState("")
+    const [user, loading, error] = useAuthState(auth)
+    let history = useHistory()
+    // let location = useLocation()
     const [data, setdata] = useState({
-        username:"",
+        email:"",
         password:""
     })
 
@@ -16,9 +21,13 @@ export default function Login(){
         console.log(handleChange)
     }
 
-    const handleSubmit = () => {
-
-    }
+    useEffect(() => {
+        if (loading) {
+            return
+        }
+        
+        if(user) history.replace("/dashboard")
+    }, [user, loading])
 
     return (
         <>
@@ -32,12 +41,12 @@ export default function Login(){
                     <hr/>
                     <br/>
                     <Container>
-                        <form action="/dashboard" onSubmit={handleSubmit}>
+                        {/* <form action="/dashboard"> */}
                         {/* <TextField id="demo-helper-text-misaligned-no-helper" label="Username" /> */}
-                        <input id="username" type="text" value={data.username} onChange={handleChange} name="username" placeholder="Username" className="input-form"></input> <br/>
-                        <input id="password" type="password" value={data.passwordpassword} onChange={handleChange} name="password" placeholder="Password" className="input-form"></input> <br/>
-                        <button className="span-form">Login</button>
-                        </form>
+                        <input id="email" type="email" value={data.email} onChange={handleChange} name="email" placeholder="Username" className="input-form"></input> <br/>
+                        <input id="password" type="password" value={data.password} onChange={handleChange} name="password" placeholder="Password" className="input-form"></input> <br/>
+                        <button className="span-form" style={{cursor: 'pointer'}} onClick={()=> signInWithEmailAndPassword(data.email, data.password)}>Login</button>
+                        {/* </form> */}
                         {/* <span className="span-text-bottom-contact">Contact to dev@aol.com</span> */}
                     </Container>
                     <Container className="container-text">

@@ -1,6 +1,6 @@
 // import logo from './logo.svg';
 // import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Login from './pages/login';
 // import Sidebar from './component/Sidebar';
 import Therapist from './pages/therapist';
@@ -13,11 +13,11 @@ function App() {
   return (
     <BrowserRouter>
       
-      <Routes>
-        <Route path="/" element={<Login/>}/>
-        <Route path="/dashboard" element={<Dashboard/>}/>
-        <Route path="/therapist" element={<Therapist/>}/>
-      </Routes>
+      <Switch>
+        <Route path="/" exact  component={Login}/>
+        <Route path="/dashboard"  component={Dashboard}/>
+        <Route path="/therapist"   component={Therapist}/>
+      </Switch>
     </BrowserRouter>
     // <Login></Login>
     // <Sidebar></Sidebar>
