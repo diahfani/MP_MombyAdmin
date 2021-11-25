@@ -4,15 +4,16 @@ import React, { useState } from 'react'
 import '../style/login.css'
 
 export default function Login(){
-    const [username, setusername] = useState("")
-    const [password, setpassword] = useState("")
+    // const [username, setusername] = useState("")
+    // const [password, setpassword] = useState("")
+    const [data, setdata] = useState({
+        username:"",
+        password:""
+    })
 
-    const handleChangeUsername = (e) => {
-        setusername({...username, [e.target.name]: e.target.value})
-    }
-
-    const handleChangePassword = (e) => {
-        setpassword({...password, [e.target.name]: e.target.value})
+    const handleChange = (e) => {
+        setdata({...data, [e.target.name]: e.target.value})
+        console.log(handleChange)
     }
 
     const handleSubmit = () => {
@@ -31,10 +32,10 @@ export default function Login(){
                     <hr/>
                     <br/>
                     <Container>
-                        <form onSubmit={handleSubmit}>
+                        <form action="/dashboard" onSubmit={handleSubmit}>
                         {/* <TextField id="demo-helper-text-misaligned-no-helper" label="Username" /> */}
-                        <input id="username" type="text" value={username} onChange={handleChangeUsername} name="username" placeholder="Username" className="input-form"></input> <br/>
-                        <input id="password" type="password" value={password} onChange={handleChangePassword} name="password" placeholder="Password" className="input-form"></input> <br/>
+                        <input id="username" type="text" value={data.username} onChange={handleChange} name="username" placeholder="Username" className="input-form"></input> <br/>
+                        <input id="password" type="password" value={data.passwordpassword} onChange={handleChange} name="password" placeholder="Password" className="input-form"></input> <br/>
                         <button className="span-form">Login</button>
                         </form>
                         {/* <span className="span-text-bottom-contact">Contact to dev@aol.com</span> */}

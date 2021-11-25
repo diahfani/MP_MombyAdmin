@@ -3,11 +3,59 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { split, HttpLink } from '@apollo/client';
+import { getMainDefinition } from '@apollo/client/utilities';
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+} from "@apollo/client"
+
+const httplink = new HttpLink({
+  uri: 'https://clever-condor-65.hasura.app/v1/graphql',
+  headers: {
+    "content-type": "application/json",
+    'x-hasura-admin-secret': 'cZ8H2rQtZFlTsY5Avpz9Cza1zDckUBPVF40vh91WwSZLgoQMcdl5wi3ccUF0K8ob'
+  }
+})
+
+const wsLink = new WebSocketLink({
+  uri: 'wss://clever-condor-65.hasura.app/v1/graphql',
+  options: {
+    reconnect: true,
+    connectionParams: {
+      headers: {
+        "content-type": "application/json",
+        'x-hasura-admin-secret': 'cZ8H2rQtZFlTsY5Avpz9Cza1zDckUBPVF40vh91WwSZLgoQMcdl5wi3ccUF0K8ob'
+      }
+    }
+  }
+});
+
+const splitLink = split(
+  ({ query }) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  httplink,
+);
+
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: splitLink
+});
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ApolloProvider client={client}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </ApolloProvider>,
   document.getElementById('root')
 );
 
