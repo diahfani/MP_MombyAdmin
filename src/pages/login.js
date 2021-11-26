@@ -9,7 +9,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 
 export default function Login(){
     const [user, loading, error] = useAuthState(auth)
-    let history = useHistory()
+    const history = useHistory()
     // let location = useLocation()
     const [data, setdata] = useState({
         email:"",
@@ -26,7 +26,7 @@ export default function Login(){
             return
         }
         
-        if(user) history.replace("/dashboard")
+        if(user) history.push("/dashboard")
     }, [user, loading])
 
     return (

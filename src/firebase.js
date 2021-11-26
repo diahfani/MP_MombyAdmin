@@ -2,6 +2,7 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+// import { useHistory } from 'react-router';
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
 // import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -25,9 +26,12 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const auth = app.auth();
 
+
 const signInWithEmailAndPassword = async (email, password) => {
+    
     try {
         await auth.signInWithEmailAndPassword(email, password);
+
     } catch (err) {
         console.error(err)
         alert(err.message)

@@ -1,5 +1,6 @@
 import '../style/therapistlist.css'
 import img from '../images/2853458.jpg'
+import { Link } from 'react-router-dom'
 
 
 export default function TherapistList() {
@@ -23,8 +24,10 @@ export default function TherapistList() {
                             <div>
                             <span className="card-text" style={{margin:'8px'}}>Status :</span>
                             <span className="card-text">Aktif</span>
-                            <span style={{marginLeft:'410px', marginRight:'20px', padding:'8px', background:'#0E483F', borderRadius:'20px', cursor:'pointer', color:'white'}}>Edit</span>
-                            <span style={{margin:'0px 10px 0px 0px', padding:'8px 15px 8px 15px', background:'#B12929', borderRadius:'20px', cursor:'pointer', color:'white'}}>Hapus</span>
+                            <Link to="/update-therapist">
+                            <span className="edit-button">Edit</span>
+                            </Link>
+                            <span className="delete-button">Hapus</span>
                             </div>
                             
                             {/* <div className="justify-content-end">
