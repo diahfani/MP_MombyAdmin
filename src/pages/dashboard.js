@@ -1,7 +1,7 @@
 import Sidebar from '../component/Sidebar'
 import AdminBar from '../component/AdminBar'
 import '../style/dashboard.css'
-import {CardTotalTherapist, CardTotalLayanan, CardJumlahReservasi, TabelTherapist} from '../component/CardDashboard'
+import {CardTotalTherapist, CardTotalLayanan, CardJumlahReservasi, TabelTherapist, TabelLayanan } from '../component/CardDashboard'
 import { Row, Col } from 'react-bootstrap'
 
 export default function Dashboard() {
@@ -33,6 +33,13 @@ export default function Dashboard() {
                 <TabelTherapist/>
             </div>
 
+            <div className="title-three">
+                <h3 style={{fontSize:'24px'}}>Tabel Layanan</h3>
+            </div>
+
+            <div className="tabel-layanan">
+                <TabelLayanan/>
+            </div>
             {/* <div className="card-monitoring">
                 <div className="jumlah-therapist">
                     <CardDashboard/>

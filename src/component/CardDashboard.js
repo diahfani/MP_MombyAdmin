@@ -32,7 +32,7 @@ function CardJumlahReservasi() {
 function TabelTherapist() {
     return (
         <div>
-            <Table responsive striped bordered style={{background:'#EAF6F5'}}>
+            <Table responsive striped bordered style={{background:'#EAF6F5', borderRadius:'10px'}}>
                 <thead>
                     <td className="judul-tabel-id">ID</td>
                     <td className="judul-tabel-nama">Nama</td>
@@ -65,4 +65,40 @@ function TabelTherapist() {
     )
 }
 
-export {CardTotalTherapist, CardTotalLayanan, CardJumlahReservasi, TabelTherapist}
+function TabelLayanan() {
+    return (
+        <div>
+            <Table responsive striped bordered style={{background:'#EAF6F5'}}>
+                <thead>
+                    <td className="judul-tabel-id">ID</td>
+                    <td className="judul-tabel-nama">Nama</td>
+                    <td className="judul-tabel-tanggal">Tanggal Layanan Ditambahkan</td>
+                </thead>
+                <tbody>
+                <tr>
+                    <td className="data-tabel">1</td>
+                    <td className="data-tabel">Baby Massage</td>
+                    <td className="data-tabel">21-10-2021</td>
+                </tr>
+                <tr>
+                    <td className="data-tabel">1</td>
+                    <td className="data-tabel">tes</td>
+                    <td className="data-tabel">tes</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </Table>
+        </div>
+    )
+}
+
+export {CardTotalTherapist, CardTotalLayanan, CardJumlahReservasi, TabelTherapist, TabelLayanan}
