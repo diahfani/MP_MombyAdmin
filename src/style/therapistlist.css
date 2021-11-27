@@ -1,5 +1,5 @@
 .edit-button {
-  margin-left: 410px;
+  /* margin-left: 410px; */
   margin-right: 20px;
   padding: 8px;
   background: #0e483f;
@@ -20,4 +20,16 @@
   border-radius: 20px;
   cursor: pointer;
   color: white;
+}
+
+.card-text-status {
+  margin-right: 30vw;
+}
+
+.card {
+  width: 900px;
+  height: 150px;
+  margin: 0 0 20px 0;
+  overflow: hidden;
+  /* background: #eaf6f5; */
 }

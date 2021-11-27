@@ -1,0 +1,50 @@
+.title {
+  position: absolute;
+  width: 187px;
+  height: 60px;
+  left: 23vw;
+  top: 8vh;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 60px;
+
+  color: #0e483f;
+}
+
+.title-two {
+  position: absolute;
+  /* width: 187px;
+  height: 60px; */
+  left: 23vw;
+  top: 37vh;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 60px;
+
+  color: #0e483f;
+}
+
+.card-monitoring {
+  position: absolute;
+  width: 900px;
+  left: 23vw;
+  top: 15vh;
+  margin-top: 15px;
+}
+
+.tabel-therapist {
+  width: 900px;
+  height: 190px;
+  overflow: auto;
+  position: absolute;
+  top: 45vh;
+  left: 23vw;
+  margin-right: 0;
+  margin-left: 0;
+}

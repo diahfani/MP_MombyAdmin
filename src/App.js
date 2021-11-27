@@ -17,11 +17,11 @@ function App() {
     <BrowserRouter>
       
       <Switch>
-        <Route path="/" exact component={Login}></Route>
-        <Route path="/dashboard" component={Dashboard}/>
-        <Route path="/therapist" component={Therapist}/>
-        <Route path="/tambah-therapist" component={TambahTherapist}></Route>
-        <Route path="/update-therapist" component={UpdateTherapist}></Route>
+        <Route path="/login" exact component={Login}></Route>
+        <Route path="/dashboard" exact component={Dashboard}/>
+        <Route path="/therapist" exact component={Therapist}/>
+        <Route path="/tambah-therapist" exact component={TambahTherapist}></Route>
+        <Route path="/update-therapist" exact component={UpdateTherapist}></Route>
       </Switch>
     </BrowserRouter>
     // <Login></Login>

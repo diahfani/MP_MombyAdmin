@@ -26,7 +26,9 @@ export default function Login(){
             return
         }
         
-        if(user) history.push("/dashboard")
+        if(user){
+            history.replace("/dashboard")
+        } 
     }, [user, loading])
 
     return (
