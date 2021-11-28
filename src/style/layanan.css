@@ -1,0 +1,29 @@
+.title {
+  position: absolute;
+  width: 187px;
+  height: 60px;
+  left: 23vw;
+  top: 8vh;
+
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 40px;
+  line-height: 60px;
+
+  color: #0e483f;
+}
+
+.tambah-button {
+  left: 80vw;
+  top: 15vh;
+  position: absolute;
+}
+
+.card-layanan {
+  width: 1000px;
+  height: 100%;
+  left: 23vw;
+  top: 23vh;
+  position: absolute;
+}

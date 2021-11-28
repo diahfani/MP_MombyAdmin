@@ -1,8 +1,8 @@
 import '../style/therapistlist.css'
-import img from '../images/2853458.jpg'
+// import img from '../images/2853458.jpg'
 import { Link } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
-import { GET_THERAPIST } from '../store/queries'
+// import { useQuery } from '@apollo/client'
+// import { GET_THERAPIST } from '../store/queries'
 
 
 export default function TherapistList(props) {

@@ -1,13 +1,16 @@
 // import logo from './logo.svg';
 // import './App.css';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter, Switch, Route} from 'react-router-dom'
 import Login from './pages/login';
 // import Sidebar from './component/Sidebar';
 import Therapist from './pages/therapist';
 import Dashboard from './pages/dashboard'
 import TambahTherapist from './pages/therapistCreate'
 import UpdateTherapist from './pages/therapistUpdate'
-import { signInWithEmailAndPassword } from './firebase'
+import Layanan from './pages/layanan'
+import layananCreate from './pages/layananCreate';
+import UpdateLayanan from './pages/layananUpdate'
+// import { signInWithEmailAndPassword } from './firebase'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import $ from 'jquery';
 // import Popper from 'popper.js';
@@ -22,6 +25,9 @@ function App() {
         <Route path="/therapist" exact component={Therapist}/>
         <Route path="/tambah-therapist" exact component={TambahTherapist}></Route>
         <Route path="/update-therapist" exact component={UpdateTherapist}></Route>
+        <Route path="/layanan" exact component={Layanan}/>
+        <Route path="/tambah-layanan" exact component={layananCreate}></Route>
+        <Route path="/update-layanan" exact component={UpdateLayanan}></Route>
       </Switch>
     </BrowserRouter>
     // <Login></Login>
