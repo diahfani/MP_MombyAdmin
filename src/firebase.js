@@ -1,7 +1,10 @@
 // Import the functions you need from the SDKs you need
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+// import 'firebase/compat/firestore';
+import 'firebase/storage'
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 // import { useHistory } from 'react-router';
 // import { initializeApp } from "firebase/app";
 // import { getAnalytics } from "firebase/analytics";
@@ -21,10 +24,19 @@ const firebaseConfig = {
   measurementId: "G-J6ETX1M51Z"
 };
 
+// service firebase.storage {
+//     match /b/{bucket}/o {
+//       match /{allPaths=**} {
+//         allow read, write: if request.auth != null;
+//       }
+//     }
+//   }
+
 // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
+// const application = initializeApp(firebaseConfig);
 const app = firebase.initializeApp(firebaseConfig);
 const auth = app.auth();
+
 
 
 const signInWithEmailAndPassword = async (email, password) => {
@@ -43,7 +55,7 @@ const logout = () => {
 }
 // const analytics = getAnalytics(app);
 
-export { auth, signInWithEmailAndPassword, logout}
+export { auth, signInWithEmailAndPassword, logout, app}
 
 
 // const auth = getAuth();

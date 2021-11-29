@@ -1,17 +1,25 @@
 import '../style/therapistlist.css'
 // import img from '../images/2853458.jpg'
 import { Link } from 'react-router-dom'
+import { DELETE_THERAPIST } from '../store/mutation'
+import { GET_THERAPIST } from '../store/queries'
+import {useMutation} from '@apollo/client'
+import Loading from './loading'
 // import { useQuery } from '@apollo/client'
 // import { GET_THERAPIST } from '../store/queries'
 
 
 export default function TherapistList(props) {
+    const { id, nama, nohp, status, umur, domisili, foto, updated_at, created_at} = props.data
     // const id = key
-    // const { nama, umur, domisili, status } = data
+    
     // const { item, loading, error } = useQuery(GET_THERAPIST)
-    const status = () => {
 
-        if (props.status === true) {
+    
+
+    const checkstatus = () => {
+
+        if (status === true) {
             return <span className="card-text">Aktif</span>
         } else {
             return <span className="card-text">Tdk Aktif</span>
@@ -32,16 +40,16 @@ export default function TherapistList(props) {
                     </div>
                     <div className="col-md-8" style={{ width: '80%' }}>
                         <div className="card-body">
-                            <h5 className="card-title">{props.nama}</h5>
-                            <p className="card-text" style={{ margin: '8px' }}>{props.umur} Tahun</p>
-                            <p className="card-text" style={{ margin: '8px' }}>{props.domisili}</p>
+                            <h5 className="card-title">{nama}</h5>
+                            <p className="card-text" style={{ margin: '8px' }}>{umur} Tahun</p>
+                            <p className="card-text" style={{ margin: '8px' }}>{domisili}</p>
                             <div>
                                 <span className="card-text" style={{ margin: '8px' }}>Status :</span>
-                                <span className="card-text-status">{status(props.status)}</span>
+                                <span className="card-text-status">{checkstatus(status)}</span>
                                 <Link to="/update-therapist">
                                     <span className="edit-button">Edit</span>
                                 </Link>
-                                <span className="delete-button">Hapus</span>
+                                <span onClick={()=> props.hapusTherapist(id)} className="delete-button">Hapus</span>
                             </div>
 
                             {/* <div className="justify-content-end">

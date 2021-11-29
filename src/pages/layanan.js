@@ -5,12 +5,18 @@ import '../style/layanan.css'
 import { Link } from 'react-router-dom'
 import LayananList from '../component/LayananList'
 import { Row } from 'react-bootstrap'
-import { useQuery } from '@apollo/client'
-import { GET_LAYANAN } from '../store/queries'
+import { useSubscription, useMutation } from '@apollo/client'
+import { DELETE_LAYANAN } from '../store/mutation'
 import Loading from '../component/loading'
+import { LAYANAN_SUBSCRIPTION } from '../store/subscription'
 
 function Layanan() {
-    const {data, loading, error} = useQuery(GET_LAYANAN)
+    const {data, loading, error} = useSubscription(LAYANAN_SUBSCRIPTION)
+    const [deleteLayanan, {loading:loadingDelete}] = useMutation(DELETE_LAYANAN)
+
+    const hapusLayanan = (id) => {
+        deleteLayanan({variables: {id: id}})
+    }
 
     return (
         <div>
@@ -40,7 +46,8 @@ function Layanan() {
                     data={item}
                     nama={item.nama}
                     harga={item.harga}
-                    deskripsi={item.deskripsi}/>
+                    deskripsi={item.deskripsi}
+                    hapusLayanan={hapusLayanan}/>
                     
                 ))}
                 </Row>

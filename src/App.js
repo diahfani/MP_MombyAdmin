@@ -20,7 +20,7 @@ function App() {
     <BrowserRouter>
       
       <Switch>
-        <Route path="/login" exact component={Login}></Route>
+        <Route path="/" exact component={Login}></Route>
         <Route path="/dashboard" exact component={Dashboard}/>
         <Route path="/therapist" exact component={Therapist}/>
         <Route path="/tambah-therapist" exact component={TambahTherapist}></Route>

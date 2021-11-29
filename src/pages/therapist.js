@@ -2,13 +2,25 @@ import Sidebar from '../component/Sidebar'
 import '../style/therapist.css'
 import TherapistList from '../component/TherapistList'
 import { Link } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
+import { useQuery, useMutation, useSubscription } from '@apollo/client'
 import { GET_THERAPIST } from '../store/queries'
+import { DELETE_THERAPIST } from '../store/mutation'
 import AdminBar from '../component/AdminBar'
 import Loading from '../component/loading'
+import { THERAPIST_SUBSCRIPTION } from '../store/subscription'
 
 export default function Therapist() {
-    const { data, loading, error } = useQuery(GET_THERAPIST)
+    const {data, loading} = useSubscription(THERAPIST_SUBSCRIPTION)
+    // const { data, loading, error } = useQuery(GET_THERAPIST)
+    const [deleteTherapist, {loading: loadingDelete}] = useMutation(DELETE_THERAPIST)
+    
+    // if (loadingDelete) {
+    //     return <Loading/>
+    // }
+    
+    const hapusTherapist = (id) => {
+        deleteTherapist({variables: {id: id}})
+    }
 
     return (
         <div>
@@ -34,10 +46,11 @@ export default function Therapist() {
                     <TherapistList
                         key={item.id}
                         data={item}
-                        nama={item.nama}
-                        umur={item.umur}
-                        domisili={item.domisili}
-                        status={item.status}
+                        // nama={item.nama}
+                        // umur={item.umur}
+                        // domisili={item.domisili}
+                        // status={item.status}
+                        hapusTherapist={hapusTherapist}
                     />
                 ))}
             </div>
