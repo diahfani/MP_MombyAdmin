@@ -1,6 +1,8 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 import '../style/CardDashboard.css'
+// import {GET_THERAPIST, GET_LAYANAN} from '../store/queries'
+// import ListTabelTherapist from './ListTabelTherapist'
 
 function CardTotalTherapist() {
     return (
@@ -29,76 +31,28 @@ function CardJumlahReservasi() {
     )
 }
 
-function TabelTherapist() {
+function ListTabelTherapist(props) {
     return (
-        <div>
-            <Table responsive striped bordered style={{background:'#EAF6F5', borderRadius:'10px'}}>
-                <thead>
-                    <td className="judul-tabel-id">ID</td>
-                    <td className="judul-tabel-nama">Nama</td>
-                    <td className="judul-tabel-tanggal">Tanggal Bergabung</td>
-                </thead>
-                <tbody>
-                <tr>
-                    <td className="data-tabel">21</td>
-                    <td className="data-tabel">Diah</td>
-                    <td className="data-tabel">21-10-2021</td>
-                </tr>
-                <tr>
-                    <td className="data-tabel">1</td>
-                    <td className="data-tabel">tes</td>
-                    <td className="data-tabel">tes</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </Table>
-        </div>
+        <tbody>
+            <tr>
+                <td className="data-tabel">{props.id}</td>
+                <td className="data-tabel">{props.nama}</td>
+                <td className="data-tabel">{props.tanggal}</td>
+            </tr>
+        </tbody>
     )
 }
 
-function TabelLayanan() {
+function ListTabelLayanan(props) {
     return (
-        <div>
-            <Table responsive striped bordered style={{background:'#EAF6F5'}}>
-                <thead>
-                    <td className="judul-tabel-id">ID</td>
-                    <td className="judul-tabel-nama">Nama</td>
-                    <td className="judul-tabel-tanggal">Tanggal Layanan Ditambahkan</td>
-                </thead>
-                <tbody>
-                <tr>
-                    <td className="data-tabel">1</td>
-                    <td className="data-tabel">Baby Massage</td>
-                    <td className="data-tabel">21-10-2021</td>
-                </tr>
-                <tr>
-                    <td className="data-tabel">1</td>
-                    <td className="data-tabel">tes</td>
-                    <td className="data-tabel">tes</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                </tbody>
-            </Table>
-        </div>
+        <tbody>
+            <tr>
+                <td className="data-tabel">{props.id}</td>
+                <td className="data-tabel">{props.nama}</td>
+                <td className="data-tabel">{props.tanggal}</td>
+            </tr>
+        </tbody>
     )
 }
 
-export {CardTotalTherapist, CardTotalLayanan, CardJumlahReservasi, TabelTherapist, TabelLayanan}
+export {CardTotalTherapist, CardTotalLayanan, CardJumlahReservasi, ListTabelTherapist, ListTabelLayanan}

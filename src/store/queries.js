@@ -8,6 +8,7 @@ query getTherapist {
       umur
       domisili
       status
+      created_at
     }
   }
   `

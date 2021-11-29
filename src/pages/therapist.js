@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom'
 import { useQuery } from '@apollo/client'
 import { GET_THERAPIST } from '../store/queries'
 import AdminBar from '../component/AdminBar'
-
+import Loading from '../component/loading'
 
 export default function Therapist() {
     const { data, loading, error } = useQuery(GET_THERAPIST)
-
 
     return (
         <div>
@@ -28,7 +27,10 @@ export default function Therapist() {
                 </Link>
             </div>
             <div className="card-container">
-                {data?.mini_project_therapist?.map(item => (
+                { loading?
+                <Loading/>
+                :
+                data?.mini_project_therapist?.map(item => (
                     <TherapistList
                         key={item.id}
                         data={item}

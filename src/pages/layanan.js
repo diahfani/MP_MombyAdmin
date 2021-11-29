@@ -7,6 +7,7 @@ import LayananList from '../component/LayananList'
 import { Row } from 'react-bootstrap'
 import { useQuery } from '@apollo/client'
 import { GET_LAYANAN } from '../store/queries'
+import Loading from '../component/loading'
 
 function Layanan() {
     const {data, loading, error} = useQuery(GET_LAYANAN)
@@ -29,7 +30,10 @@ function Layanan() {
             </div>
             <div className="card-layanan" style={{ display: 'flex', justifyContent:'center'}}>
             <Row style={{width:'900px'}}>
-                {data?.mini_project_service?.map(item => (
+                {loading?
+                <Loading/>
+                :
+                data?.mini_project_service?.map(item => (
                     
                     <LayananList
                     key={item.id}
