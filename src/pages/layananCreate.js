@@ -6,14 +6,12 @@ import { Form, Col, Row, Button } from 'react-bootstrap'
 import { useMutation } from '@apollo/client'
 import { INSERT_LAYANAN } from '../store/mutation'
 import { GET_LAYANAN } from '../store/queries'
+import { storage } from '../firebase'
+import { ref, uploadBytesResumable, getDownloadURL } from '@firebase/storage'
 
 
 function LayananCreate() {
     const [insertLayanan, {loading, error}] = useMutation(INSERT_LAYANAN, {refetchQueries: [GET_LAYANAN]})
-    // const [nama, setnama] = useState("")
-    // const [harga, setharga] = useState(0)
-    // const [deskripsi, setdeskripsi] = useState("")
-    // const [foto, setfoto] = useState("")
 
     const [state, setstate] = useState({
         nama:"",
@@ -21,18 +19,53 @@ function LayananCreate() {
         deskripsi:""
         })
 
+    const [foto, setfoto] = useState("")
+    const [progress, setprogress] = useState(0)
+    const [urldownload, seturl] = useState("")
+
+
+    const handleChangeFoto = (e) => {
+        setfoto(e.target.files[0])
+        // console.log(e.target.value)
+    }
+
     const handleChange = (e) =>{
         setstate({
             ...state,
             [e.target.name]: e.target.value
         })
     }
+    const uploadFoto = (file) => {
+        if (!file) return;
+        const storageRef = ref(storage, `/files/${file.name}`)
+        const uploadTask = uploadBytesResumable(storageRef, file)
+        // const uploadTask = storageRef.put(file)
+        uploadTask.on("state_changed", (snapshot) => 
+        {
+            console.log(snapshot)
+        }, (err) => console.log(err),
+        ()=> {
+            getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                seturl(url)
+            })}
+        )
+        // uploadTask
+        // .then((snapshot) => {
+        //     return snapshot.ref.getDownloadURL()
+        // })
+        // .then((imgUrl) => {
+        //     storage
+        //     .ref("files")
+        // })
+    }
+
     const tambahLayanan = () => {
         insertLayanan({
             variables: {
                 nama: state.nama,
                 harga: state.harga,
                 deskripsi: state.deskripsi,
+                foto: urldownload
             }
         })
     }
@@ -75,11 +108,12 @@ function LayananCreate() {
                     <Form.Group as={Row} className="mb-3">
                         <Form.Label column sm={2} className="label-kedua">Foto Formal</Form.Label>
                         <Col className="form-kedua" sm={5}>
-                            <Form.Control type="file" name="foto" id="file"></Form.Control>
+                            <Form.Control type="file" name="foto" id="file" onChange={handleChangeFoto}></Form.Control>
+                            <Button style={{ background: '#0E483F' }} onClick={uploadFoto}>Upload</Button>
                         </Col>
-                        {/* <Button style={{ background: '#0E483F' }}>Upload</Button>
-                        <Form.Label>{progress}</Form.Label>
-                        <img className="ref" src={fileUrl} alt="uploaded images" style={{ width: '150px' }} /> */}
+                        
+                        {/* <Form.Label>{progress}</Form.Label> */}
+                        {/* <img className="ref" src={fileUrl} alt="uploaded images" style={{ width: '150px' }} /> */}
                     </Form.Group>
 
                     <Form.Group as={Row} className="mb-3">

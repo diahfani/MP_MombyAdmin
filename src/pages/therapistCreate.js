@@ -10,10 +10,14 @@ import { GET_THERAPIST } from '../store/queries'
 import { useMutation } from '@apollo/client'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { storage } from '../firebase'
+import { ref, uploadBytesResumable, getDownloadURL } from '@firebase/storage'
+// import firebase from '../firebase'
 // import { app } from '../firebase'
 
 export default function TambahTherapist() {
     // const {data: dataTherapist, loading: loadingTherapist, error: errorTherapist} = useQuery
+
     const [insertTherapist, { loading: loadingInsert, error: errorInsert }] = useMutation(INSERT_THERAPIST, { refetchQueries: [GET_THERAPIST] })
 
 
@@ -25,22 +29,14 @@ export default function TambahTherapist() {
         status: false
     })
 
-    // const [nama, setnama] = useState("")
-    // const [umur, setumur] = useState("")
-    // const [noHp, setnoHp] = useState("")
-    // const [domisili, setdomisili] = useState("")
-    // const [status, setstatus] = useState(false)
+    const [foto, setfoto] = useState(null)
+    const [progress, setprogress] = useState(0)
+    const [urldownload, seturl] = useState("")
 
-    const [file, setfile] = useState('')
-    // const [fileUrl, setfileUrl] = useState('')
-    // const [progress, setprogress] = useState(0)
-
-    const handlChangeFoto = (e) => {
-        if (e.target.files[0]) {
-            setfile([...file, e.target.files[0]])
-        }
+    const handleChangeFoto = (e) => {
+        setfoto(e.target.files[0])
+        // console.log(e.target.value)
     }
-
 
     const handleChange = (e) => {
         setstate({
@@ -50,43 +46,35 @@ export default function TambahTherapist() {
         console.log(e.target.value)
     }
 
-    // const uploadFoto = () => {
-    //     let storage = app.storage()
-    //     let storageRef = storage.ref()
-    //     let upload = storageRef.child('folder/' + file.name).put(file)
 
-    //     upload.on(app.storage.TaskEvent.STATE_CHANGED, (snapshot) => {
-    //         let newProgress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes)) * 100
-    //         setprogress([...progress, newProgress])
-    //     }, (error) => {
-    //         throw error
-    //     }, () => {
-    //         upload.snapshot.ref.getDownloadURL().then((url) => {
-    //             setfileUrl([...fileUrl, url])
-    //         })
-    //     })
-
-    //     document.getElementById("file").value = null
-    //     // let storageRef = app.ref()
-    //     // let file = document.getElementById("foto").files[0]
-    //     // console.log(file)
-
-    //     // let thisRef = storageRef.child(file)
-    //     // thisRef.put(file).then(function (snapshot) {
-    //     //     alert("File uploaded")
-    //     //     console.log('uploaded a file or blob')
-    //     // })
-    // }
+    
+    const uploadFoto = (file) => {
+        if (!file) return;
+        const storageRef = ref(storage, `/files/${file.name}`)
+        const uploadTask = uploadBytesResumable(storageRef, file)
+        // const uploadTask = storageRef.put(file)
+        uploadTask.on("state_changed", (snapshot) => 
+        {
+            console.log(snapshot)
+        }, (err) => console.log(err),
+        ()=> {
+            getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                seturl(url)
+            })}
+        )
+        // uploadTask
+        // .then((snapshot) => {
+        //     return snapshot.ref.getDownloadURL()
+        // })
+        // .then((imgUrl) => {
+        //     storage
+        //     .ref("files")
+        // })
+    }
 
 
     const handleSubmit = () => {
-        // console.log('test')
-        // e.prevent.default()
-        // if (state.nama === "" || state.umur === 0 || state.domisili === "") {
-        //     alert("data ada yg masih kosong")
-        // } 
-        // else 
-        // {
+
         insertTherapist({
             variables: {
                 nama: state.nama,
@@ -94,19 +82,19 @@ export default function TambahTherapist() {
                 status: state.status,
                 umur: Number(state.umur),
                 domisili: state.domisili,
-                foto: ""
+                foto: urldownload
 
 
             }
         })
-        // setstate({
-        //     ...state,
-        //     nama: "",
-        //     umur: 0,
-        //     noHp: 0,
-        //     domisili: "",
-        //     status: false
-        // })
+        setstate({
+            ...state,
+            nama: "",
+            umur: 0,
+            noHp: 0,
+            domisili: "",
+            status: false
+        })
 
 
 
@@ -162,11 +150,12 @@ export default function TambahTherapist() {
                     <Form.Group as={Row} className="mb-3">
                         <Form.Label column sm={2} className="label-kedua">Foto Formal</Form.Label>
                         <Col className="form-kedua" sm={5}>
-                            <Form.Control type="file" name="foto" id="file"></Form.Control>
+                            <Form.Control type="file" name="foto" id="file" onChange={handleChangeFoto}></Form.Control>
+                            <Button style={{ background: '#0E483F', marginTop:'10px' }} onClick={uploadFoto}>Upload</Button>
                         </Col>
-                        {/* <Button style={{ background: '#0E483F' }}>Upload</Button>
-                        <Form.Label>{progress}</Form.Label>
-                        <img className="ref" src={fileUrl} alt="uploaded images" style={{ width: '150px' }} /> */}
+                        
+                        {/* <Form.Label>{progress}</Form.Label> */}
+                        {/* <img className="ref" src={fileUrl} alt="uploaded images" style={{ width: '150px' }} /> */}
                     </Form.Group>
 
                     <Form.Group as={Row} className="mb-3">
