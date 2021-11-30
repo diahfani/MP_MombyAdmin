@@ -24,10 +24,10 @@ function App() {
         <Route path="/dashboard" exact component={Dashboard}/>
         <Route path="/therapist" exact component={Therapist}/>
         <Route path="/tambah-therapist" exact component={TambahTherapist}></Route>
-        <Route path="/update-therapist" exact component={UpdateTherapist}></Route>
+        <Route path="/update-therapist/:id" exact component={UpdateTherapist}></Route>
         <Route path="/layanan" exact component={Layanan}/>
         <Route path="/tambah-layanan" exact component={layananCreate}></Route>
-        <Route path="/update-layanan" exact component={UpdateLayanan}></Route>
+        <Route path="/update-layanan/:id" exact component={UpdateLayanan}></Route>
       </Switch>
     </BrowserRouter>
     // <Login></Login>

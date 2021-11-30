@@ -9,6 +9,7 @@ query getTherapist {
       domisili
       status
       created_at
+      nohp
     }
   }
   `
@@ -25,4 +26,32 @@ query GET_LAYANAN {
 }
 `
 
-export { GET_THERAPIST, GET_LAYANAN }
+const GET_THERAPIST_BY_ID = gql`
+query MyQuery($id: Int!) {
+  mini_project_therapist_by_pk(id: $id) {
+    created_at
+    domisili
+    foto
+    id
+    nama
+    nohp
+    status
+    umur
+    updated_at
+  }
+}
+`
+
+const GET_LAYANAN_BY_ID = gql`
+query MyQuery($id: Int!) {
+  mini_project_service_by_pk(id: $id) {
+    created_at
+    deskripsi
+    foto
+    harga
+    id
+    nama
+    updated_at
+  }
+}`
+export { GET_THERAPIST, GET_LAYANAN, GET_LAYANAN_BY_ID, GET_THERAPIST_BY_ID }

@@ -34,7 +34,7 @@ export default function Therapist() {
                 <h2>Therapist</h2>
             </div>
             <div className="tambah-button">
-                <Link to="/tambah-therapist">
+                <Link to={"/tambah-therapist"}>
                     <span className="bttn">Tambah</span>
                 </Link>
             </div>

@@ -1,10 +1,10 @@
 import '../style/therapistlist.css'
 // import img from '../images/2853458.jpg'
 import { Link } from 'react-router-dom'
-import { DELETE_THERAPIST } from '../store/mutation'
-import { GET_THERAPIST } from '../store/queries'
-import {useMutation} from '@apollo/client'
-import Loading from './loading'
+// import { DELETE_THERAPIST } from '../store/mutation'
+// import { GET_THERAPIST } from '../store/queries'
+// import {useMutation} from '@apollo/client'
+// import Loading from './loading'
 // import { useQuery } from '@apollo/client'
 // import { GET_THERAPIST } from '../store/queries'
 
@@ -43,10 +43,10 @@ export default function TherapistList(props) {
                             <h5 className="card-title">{nama}</h5>
                             <p className="card-text" style={{ margin: '8px' }}>{umur} Tahun</p>
                             <p className="card-text" style={{ margin: '8px' }}>{domisili}</p>
-                            <div>
+                            <div key={id}>
                                 <span className="card-text" style={{ margin: '8px' }}>Status :</span>
                                 <span className="card-text-status">{checkstatus(status)}</span>
-                                <Link to="/update-therapist">
+                                <Link to={`/update-therapist/${id}`} data={props.data}>
                                     <span className="edit-button">Edit</span>
                                 </Link>
                                 <span onClick={()=> props.hapusTherapist(id)} className="delete-button">Hapus</span>

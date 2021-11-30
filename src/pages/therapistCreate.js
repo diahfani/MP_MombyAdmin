@@ -9,12 +9,13 @@ import { INSERT_THERAPIST } from '../store/mutation'
 import { GET_THERAPIST } from '../store/queries'
 import { useMutation } from '@apollo/client'
 import { useState } from 'react'
-import { app } from '../firebase'
+import { Link } from 'react-router-dom'
+// import { app } from '../firebase'
 
 export default function TambahTherapist() {
     // const {data: dataTherapist, loading: loadingTherapist, error: errorTherapist} = useQuery
-    const [insertTherapist, { loading, error }] = useMutation(INSERT_THERAPIST, { refetchQueries: [GET_THERAPIST] })
-    
+    const [insertTherapist, { loading: loadingInsert, error: errorInsert }] = useMutation(INSERT_THERAPIST, { refetchQueries: [GET_THERAPIST] })
+
 
     const [state, setstate] = useState({
         nama: "",
@@ -24,15 +25,22 @@ export default function TambahTherapist() {
         status: false
     })
 
+    // const [nama, setnama] = useState("")
+    // const [umur, setumur] = useState("")
+    // const [noHp, setnoHp] = useState("")
+    // const [domisili, setdomisili] = useState("")
+    // const [status, setstatus] = useState(false)
+
     const [file, setfile] = useState('')
-    const [fileUrl, setfileUrl] = useState('')
-    const [progress, setprogress] = useState(0)
+    // const [fileUrl, setfileUrl] = useState('')
+    // const [progress, setprogress] = useState(0)
 
     const handlChangeFoto = (e) => {
         if (e.target.files[0]) {
             setfile([...file, e.target.files[0]])
         }
     }
+
 
     const handleChange = (e) => {
         setstate({
@@ -71,35 +79,36 @@ export default function TambahTherapist() {
     // }
 
 
-    const handleSubmit = (e) => {
-        console.log('test')
-        e.prevent.default()
-        if (state.nama === "" || state.umur === 0 || state.domisili === "") {
-            alert("data ada yg masih kosong")
-        } else {
-            insertTherapist({
-                variables: {
-                    object: {
-                        nama: state.nama,
-                        nohp: state.noHp,
-                        umur: state.umur,
-                        domisili: state.domisili,
-                        status: state.status
-                    }
-                    
-    
-                }
-            })
-            // setstate({
-            //     ...state,
-            //     nama: "",
-            //     umur: 0,
-            //     noHp: 0,
-            //     domisili: "",
-            //     status: false
-            // })
-        }
-        
+    const handleSubmit = () => {
+        // console.log('test')
+        // e.prevent.default()
+        // if (state.nama === "" || state.umur === 0 || state.domisili === "") {
+        //     alert("data ada yg masih kosong")
+        // } 
+        // else 
+        // {
+        insertTherapist({
+            variables: {
+                nama: state.nama,
+                nohp: Number(state.noHp),
+                status: state.status,
+                umur: Number(state.umur),
+                domisili: state.domisili,
+                foto: ""
+
+
+            }
+        })
+        // setstate({
+        //     ...state,
+        //     nama: "",
+        //     umur: 0,
+        //     noHp: 0,
+        //     domisili: "",
+        //     status: false
+        // })
+
+
 
 
         //         if (file === null) {
@@ -121,7 +130,7 @@ export default function TambahTherapist() {
                 <h2>Therapist</h2>
             </div>
             <div className="container-tambah">
-                <Form style={{ padding: '3vh' }} onSubmit={handleSubmit}>
+                <Form style={{ padding: '3vh' }} action="/therapist" onSubmit={handleSubmit}>
                     <Form.Group as={Row} className="mb-3">
                         <Form.Label column sm={2} className="label-pertama">Nama</Form.Label>
                         <Col className="form-pertama" sm={5}>
@@ -139,7 +148,7 @@ export default function TambahTherapist() {
                     <Form.Group as={Row} className="mb-3">
                         <Form.Label column sm={2} className="label-kedua">No. HP</Form.Label>
                         <Col className="form-kedua" sm={5}>
-                            <Form.Control type="number" placeholder="089xxxxxxxxx" name="nohp" value={state.noHp} onChange={handleChange}></Form.Control>
+                            <Form.Control type="number" placeholder="089xxxxxxxxx" name="noHp" value={state.noHp} onChange={handleChange}></Form.Control>
                         </Col>
                     </Form.Group>
 
@@ -172,7 +181,10 @@ export default function TambahTherapist() {
 
                     <Form.Group as={Row} className="mb-3">
                         <Col style={{ marginLeft: '14.5vw' }} sm={{ span: 10, offset: 2 }}>
-                            <Button style={{ background: '#0E483F' }} type="submit">Submit</Button>
+                            <Link to="/therapist">
+                                <Button style={{ background: '#0E483F' }} onClick={handleSubmit}>Submit</Button>
+                            </Link>
+
                         </Col>
                     </Form.Group>
                 </Form>
