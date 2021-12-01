@@ -5,9 +5,14 @@ import '../style/login.css'
 import { useHistory } from 'react-router-dom';
 // import { auth, signInWithEmailAndPassword } from '../firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
+import { useAuth0 } from '@auth0/auth0-react'
 
 
 export default function Login(){
+    const { loginWithRedirect } = useAuth0()
+
+
+
     // const [user, loading, error] = useAuthState(auth)
     // const history = useHistory()
     // // let location = useLocation()
@@ -54,6 +59,7 @@ export default function Login(){
                         // onChange={handleChange} 
                         name="password" placeholder="Password" className="input-form"></input> <br/>
                         <button className="span-form" style={{cursor: 'pointer'}} 
+                        onClick={() => loginWithRedirect()} 
                         // onClick={()=> signInWithEmailAndPassword(data.email, data.password)}
                         to="/dashboard"
                         >Login</button>

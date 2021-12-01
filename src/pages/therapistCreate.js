@@ -12,6 +12,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { storage } from '../firebase'
 import { ref, uploadBytesResumable, getDownloadURL } from '@firebase/storage'
+import { v4 as uuidv4 } from 'uuid';
 // import firebase from '../firebase'
 // import { app } from '../firebase'
 
@@ -29,10 +30,10 @@ export default function TambahTherapist() {
         status: false
     })
 
-    const [foto, setfoto] = useState(null)
+    const [foto, setfoto] = useState("")
     const [progress, setprogress] = useState(0)
     const [urldownload, seturl] = useState("")
-
+    
     const handleChangeFoto = (e) => {
         setfoto(e.target.files[0])
         // console.log(e.target.value)
@@ -45,10 +46,20 @@ export default function TambahTherapist() {
         })
         console.log(e.target.value)
     }
-
-
     
     const uploadFoto = (file) => {
+        // e.preventDefault();
+        // const storageRef = ref(storage, `/images/${foto.name}`);
+        // const uploadTask = storageRef.put(foto);
+        // uploadTask.on("state_changed", console.log, console.error, () => {
+        //   ref
+        //     .getDownloadURL()
+        //     .then((url) => {
+        //       setfoto(null);
+        //       seturl(url);
+        //     });
+        // });
+      
         if (!file) return;
         const storageRef = ref(storage, `/files/${file.name}`)
         const uploadTask = uploadBytesResumable(storageRef, file)

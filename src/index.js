@@ -11,6 +11,10 @@ import {
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client"
+import { Auth0Provider } from '@auth0/auth0-react'
+
+const domain = "dev-l-jnxzbn.us.auth0.com"
+const clientID = "64TIkoOsMBHgZ6V9ar66zDJNGHL9ACKL"
 
 const httplink = new HttpLink({
   uri: 'https://clever-condor-65.hasura.app/v1/graphql',
@@ -51,11 +55,15 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
+  <Auth0Provider domain={domain} clientId={clientID} redirectUri={window.location.origin}>
   <ApolloProvider client={client}>
+    
     <React.StrictMode>
       <App />
     </React.StrictMode>
-  </ApolloProvider>,
+    
+  </ApolloProvider>
+  </Auth0Provider>,
   document.getElementById('root')
 );
 

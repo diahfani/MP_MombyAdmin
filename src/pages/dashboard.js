@@ -7,9 +7,11 @@ import { GET_THERAPIST, GET_LAYANAN } from '../store/queries'
 import { useQuery } from '@apollo/client'
 import { Table } from 'react-bootstrap'
 import Loading from '../component/loading'
+// import { useAuth0 } from '@auth0/auth0-react'
 // import ListTabelTherapist from '../component/CardDashboard'
 
 export default function Dashboard() {
+    
     const { data: datatherapist, loading: loadingtherapist, error: errortherapist } = useQuery(GET_THERAPIST)
     const { data: datalayanan, loading: loadinglayanan, error: errorlayanan } = useQuery(GET_LAYANAN)
 
