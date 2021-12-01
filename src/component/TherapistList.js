@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export default function TherapistList(props) {
     const { id, nama, nohp, status, umur, domisili, foto, updated_at, created_at} = props.data
 
-    
+    console.log(foto)
 
     const checkstatus = () => {
 
@@ -22,7 +22,7 @@ export default function TherapistList(props) {
             <div className="card" style={{ background: '#EAF6F5' }}>
                 <div className="row g-0">
                     <div className="col-md-4" style={{ width: '150px', margin: 0 }}>
-                        <img src={foto || "https://images.unsplash.com/photo-1606738132449-e3590ddb6793?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80"} alt="..." className="img-fluid rounded-start" style={{ width: '100%', height: '100%' }}></img>
+                        <img src="https://images.unsplash.com/photo-1606738132449-e3590ddb6793?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80" alt="..." className="img-fluid rounded-start" style={{ width: '100%', height: '100%' }}></img>
                     </div>
                     <div className="col-md-8" style={{ width: '80%' }}>
                         <div className="card-body">

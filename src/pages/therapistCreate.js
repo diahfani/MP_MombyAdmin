@@ -11,6 +11,7 @@ import { useMutation } from '@apollo/client'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { storage } from '../firebase'
+import Loading from '../component/loading'
 import { ref, uploadBytesResumable, getDownloadURL } from '@firebase/storage'
 import { v4 as uuidv4 } from 'uuid';
 // import firebase from '../firebase'
@@ -22,6 +23,8 @@ export default function TambahTherapist() {
     const [insertTherapist, { loading: loadingInsert, error: errorInsert }] = useMutation(INSERT_THERAPIST, { refetchQueries: [GET_THERAPIST] })
 
 
+    
+
     const [state, setstate] = useState({
         nama: "",
         umur: 0,
@@ -30,15 +33,23 @@ export default function TambahTherapist() {
         status: false
     })
 
-    const [foto, setfoto] = useState("")
+    const [foto, setfoto] = useState(null)
     const [progress, setprogress] = useState(0)
     const [urldownload, seturl] = useState("")
-    
+
+    if (errorInsert) {
+        return <p>error...</p>
+    }
+
     const handleChangeFoto = (e) => {
-        setfoto(e.target.files[0])
+        if (e.target.files[0]) {
+            setfoto(e.target.files[0])
+        }
+        
         // console.log(e.target.value)
     }
 
+    console.log("image: ", foto)
     const handleChange = (e) => {
         setstate({
             ...state,
@@ -46,66 +57,75 @@ export default function TambahTherapist() {
         })
         console.log(e.target.value)
     }
+
+    // function getFileExtension(filename) {
+    //     return filename.split('.').pop()
+    // }
     
-    const uploadFoto = (file) => {
-        // e.preventDefault();
-        // const storageRef = ref(storage, `/images/${foto.name}`);
-        // const uploadTask = storageRef.put(foto);
-        // uploadTask.on("state_changed", console.log, console.error, () => {
-        //   ref
-        //     .getDownloadURL()
-        //     .then((url) => {
-        //       setfoto(null);
-        //       seturl(url);
-        //     });
-        // });
-      
-        if (!file) return;
-        const storageRef = ref(storage, `/files/${file.name}`)
-        const uploadTask = uploadBytesResumable(storageRef, file)
+
+    // function generateNameFile(name) {
+    //     if (!name) {
+    //         return;
+    //     }
+        
+    //     const oldName = name
+    //     const arrayNameFile = oldName.split('.')
+    //     const extensionFile = arrayNameFile[arrayNameFile.length - 1]
+    //     let uuid = require('uuid')
+    //     let random = uuid.v4()
+    //     const newNameFile = random + "." + extensionFile
+    //     return newNameFile
+
+    //     // const oldNameFile = name
+    //     // const arrayNameFile = old
+    // }
+
+    const uploadFoto = () => {
+        const storageRef = ref(storage, `/files/${foto.name}`)
+        console.log(foto.name)
+        const uploadTask = uploadBytesResumable(storageRef, foto[0])
         // const uploadTask = storageRef.put(file)
-        uploadTask.on("state_changed", (snapshot) => 
-        {
-            console.log(snapshot)
+        uploadTask.on("state_changed", (snapshot) => {
+            const progres = Math.round((snapshot.bytesTransferred/snapshot.totalBytes) * 100)
+            setprogress(progres)
         }, (err) => console.log(err),
-        ()=> {
-            getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                seturl(url)
-            })}
+            () => {
+                getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+                    seturl(url)
+                    console.log(url)
+                })
+            }
         )
-        // uploadTask
-        // .then((snapshot) => {
-        //     return snapshot.ref.getDownloadURL()
-        // })
-        // .then((imgUrl) => {
-        //     storage
-        //     .ref("files")
-        // })
+        console.log(foto)
     }
 
 
     const handleSubmit = () => {
-
-        insertTherapist({
-            variables: {
-                nama: state.nama,
-                nohp: Number(state.noHp),
-                status: state.status,
-                umur: Number(state.umur),
-                domisili: state.domisili,
-                foto: urldownload
-
-
-            }
-        })
-        setstate({
-            ...state,
-            nama: "",
-            umur: 0,
-            noHp: 0,
-            domisili: "",
-            status: false
-        })
+        if (state.nama === "" || state.noHp === 0 || state.domisili === "") {
+            alert("Data masih ada yang kosong")
+        } else {
+            insertTherapist({
+                variables: {
+                    nama: state.nama,
+                    nohp: Number(state.noHp),
+                    status: state.status,
+                    umur: Number(state.umur),
+                    domisili: state.domisili,
+                    foto: urldownload
+    
+    
+                }
+            })
+            setstate({
+                ...state,
+                nama: "",
+                umur: 0,
+                noHp: 0,
+                domisili: "",
+                status: false
+            })
+        }
+        
 
 
 
@@ -128,8 +148,12 @@ export default function TambahTherapist() {
             <div className="title">
                 <h2>Therapist</h2>
             </div>
+            
             <div className="container-tambah">
-                <Form style={{ padding: '3vh' }} action="/therapist" onSubmit={handleSubmit}>
+                {loadingInsert?
+                <Loading/>
+            :
+            <Form style={{ padding: '3vh' }} action="/therapist" onSubmit={handleSubmit}>
                     <Form.Group as={Row} className="mb-3">
                         <Form.Label column sm={2} className="label-pertama">Nama</Form.Label>
                         <Col className="form-pertama" sm={5}>
@@ -161,10 +185,9 @@ export default function TambahTherapist() {
                     <Form.Group as={Row} className="mb-3">
                         <Form.Label column sm={2} className="label-kedua">Foto Formal</Form.Label>
                         <Col className="form-kedua" sm={5}>
-                            <Form.Control type="file" name="foto" id="file" onChange={handleChangeFoto}></Form.Control>
-                            <Button style={{ background: '#0E483F', marginTop:'10px' }} onClick={uploadFoto}>Upload</Button>
+                            <Form.Control type="file" onChange={handleChangeFoto}></Form.Control>
+                            <Button style={{ background: '#0E483F', marginTop: '10px' }} onClick={uploadFoto}>Upload</Button>
                         </Col>
-                        
                         {/* <Form.Label>{progress}</Form.Label> */}
                         {/* <img className="ref" src={fileUrl} alt="uploaded images" style={{ width: '150px' }} /> */}
                     </Form.Group>
@@ -181,14 +204,18 @@ export default function TambahTherapist() {
 
                     <Form.Group as={Row} className="mb-3">
                         <Col style={{ marginLeft: '14.5vw' }} sm={{ span: 10, offset: 2 }}>
-                            <Link to="/therapist">
+                            {/* <Link to="/therapist"> */}
                                 <Button style={{ background: '#0E483F' }} onClick={handleSubmit}>Submit</Button>
-                            </Link>
+                            {/* </Link> */}
 
                         </Col>
                     </Form.Group>
                 </Form>
+            }
+                
             </div>
+            
+            
         </div>
     )
 }

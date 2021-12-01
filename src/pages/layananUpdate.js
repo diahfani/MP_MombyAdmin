@@ -76,7 +76,7 @@ function LayananUpdate() {
                 <Container
                 // style={{ display: 'inline'}}
                 >
-                    <Container
+                    {/* <Container
                         style={{
                             // display: 'inline-block', 
                             width: '180px'
@@ -85,7 +85,7 @@ function LayananUpdate() {
                         <Col xs={6} md={4} style={{ marginRight: 0, marginLeft: 0 }}>
                             <Image style={{ width: "170px" }} src="https://images.unsplash.com/photo-1470843810958-2da815d0e041?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" rounder />
                         </Col>
-                    </Container>
+                    </Container> */}
 
                     <div style={{ marginTop: '10px' }}>
                         <Form.Group as={Row} className="mb-3">

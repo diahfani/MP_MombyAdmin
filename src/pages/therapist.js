@@ -39,7 +39,7 @@ export default function Therapist() {
                 </Link>
             </div>
             <div className="card-container">
-                { loading?
+                { loadingDelete || loading ?
                 <Loading/>
                 :
                 data?.mini_project_therapist?.map(item => (

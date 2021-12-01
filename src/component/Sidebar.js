@@ -11,7 +11,7 @@ export default function Sidebar() {
             </header>
 
             <div className="d-flex flex-column p-3 text-white" style={{ width: '280px', height:'100%', marginLeft:0, background: '#0E483F', marginRight:0 }}>
-                <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <a href="/dashboard" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <p className="fs-4 fw-bolder">Momby</p>
                     <p className="fs-6 fw-bolder m-1">Admin</p>
                 </a>

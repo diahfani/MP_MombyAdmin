@@ -3,7 +3,7 @@ import AdminBar from '../component/AdminBar'
 import '../style/dashboard.css'
 import { CardTotalTherapist, CardTotalLayanan, CardJumlahReservasi, ListTabelTherapist, ListTabelLayanan } from '../component/CardDashboard'
 import { Row, Col } from 'react-bootstrap'
-import { GET_THERAPIST, GET_LAYANAN } from '../store/queries'
+import { GET_THERAPIST, GET_LAYANAN, TOTAL_LAYANAN, TOTAL_THERAPIST } from '../store/queries'
 import { useQuery } from '@apollo/client'
 import { Table } from 'react-bootstrap'
 import Loading from '../component/loading'
@@ -12,9 +12,18 @@ import Loading from '../component/loading'
 
 export default function Dashboard() {
     
-    const { data: datatherapist, loading: loadingtherapist, error: errortherapist } = useQuery(GET_THERAPIST)
-    const { data: datalayanan, loading: loadinglayanan, error: errorlayanan } = useQuery(GET_LAYANAN)
-
+    const { data: datatherapist, loading: loadingtherapist } = useQuery(GET_THERAPIST)
+    const { data: datalayanan, loading: loadinglayanan } = useQuery(GET_LAYANAN)
+    const { data: totalLayanan, loading: loadingTotallayanan } = useQuery(TOTAL_LAYANAN)
+    const { data: totalTherapist, loading: loadingTotalTherapist } = useQuery(TOTAL_THERAPIST)
+    // const rowCount = document.getElementById('table-id').rows.length
+    // function HitungRows() {
+    //     let table = document.getElementById('table-id')
+    //     let totalRowCount = table.rows.length
+    //     return totalRowCount
+    // }
+    
+    // console.log(HitungRows())
 
     return (
         <div>
@@ -30,8 +39,8 @@ export default function Dashboard() {
 
             <div className="card-monitoring">
                 <Row>
-                    <Col sm> <CardTotalTherapist /> </Col>
-                    <Col sm> <CardTotalLayanan /> </Col>
+                    <Col sm> <CardTotalTherapist data={totalTherapist} loading={loadingTotalTherapist} /> </Col>
+                    <Col sm> <CardTotalLayanan data={totalLayanan} loading={loadingTotallayanan} /> </Col>
                     <Col sm> <CardJumlahReservasi /> </Col>
                 </Row>
             </div>
@@ -41,7 +50,7 @@ export default function Dashboard() {
             </div>
 
             <div className="tabel-therapist">
-                <Table responsive striped bordered style={{ background: '#EAF6F5', borderRadius: '10px' }}>
+                <Table id="table-id" responsive striped bordered style={{ background: '#EAF6F5', borderRadius: '10px' }}>
                     <thead>
                         <td className="judul-tabel-id">ID</td>
                         <td className="judul-tabel-nama">Nama</td>
