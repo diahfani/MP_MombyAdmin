@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 import '../style/CardDashboard.css'
-import { TOTAL_LAYANAN, TOTAL_THERAPIST } from '../store/queries'
+import { TOTAL_LAYANAN, TOTAL_THERAPIST } from '../store/subscription'
 import { useQuery, useSubscription } from '@apollo/client'
 import Loading from './loading'
 // import {GET_THERAPIST, GET_LAYANAN} from '../store/queries'
