@@ -15,8 +15,8 @@ export default function Dashboard() {
     
     const { data: datatherapist, loading: loadingtherapist } = useSubscription(THERAPIST_SUBSCRIPTION)
     const { data: datalayanan, loading: loadinglayanan } = useSubscription(LAYANAN_SUBSCRIPTION)
-    const { data: totalLayanan, loading: loadingTotallayanan } = useSubscription(TOTAL_LAYANAN)
-    const { data: totalTherapist, loading: loadingTotalTherapist } = useSubscription(TOTAL_THERAPIST)
+    // const { data: totalLayanan, loading: loadingTotallayanan } = useSubscription(TOTAL_LAYANAN)
+    // const { data: totalTherapist, loading: loadingTotalTherapist } = useSubscription(TOTAL_THERAPIST)
     // const rowCount = document.getElementById('table-id').rows.length
     // function HitungRows() {
     //     let table = document.getElementById('table-id')
@@ -40,8 +40,8 @@ export default function Dashboard() {
 
             <div className="card-monitoring">
                 <Row>
-                    <Col sm> <CardTotalTherapist data={totalTherapist} loading={loadingTotalTherapist} /> </Col>
-                    <Col sm> <CardTotalLayanan data={totalLayanan} loading={loadingTotallayanan} /> </Col>
+                    <Col sm> <CardTotalTherapist  /> </Col>
+                    <Col sm> <CardTotalLayanan  /> </Col>
                     <Col sm> <CardJumlahReservasi /> </Col>
                 </Row>
             </div>
