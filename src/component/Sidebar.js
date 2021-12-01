@@ -1,7 +1,8 @@
 import '../style/sidebar.css'
-// import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 export default function Sidebar() {
+    const history = useHistory()
     return (
         <>
             <header>
@@ -11,26 +12,26 @@ export default function Sidebar() {
             </header>
 
             <div className="d-flex flex-column p-3 text-white" style={{ width: '280px', height:'100%', marginLeft:0, background: '#0E483F', marginRight:0 }}>
-                <a href="/dashboard" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <p className="fs-4 fw-bolder">Momby</p>
                     <p className="fs-6 fw-bolder m-1">Admin</p>
                 </a>
                 <br />
                 <ul className="nav nav-pills flex-column mb-auto" style={{ height: '85vh' }}>
                     <li className="text-nav">
-                        <a href="/dashboard" aria-current="page" className="nav-link text-white" >
+                        <button onClick={()=>history.push('/dashboard')} aria-current="page" className="nav-link text-white" >
                             Dashboard
-                        </a>
+                        </button>
                     </li>
                     <li className="text-nav">
-                        <a href="/therapist" className="nav-link text-white">
+                        <button onClick={()=>history.push('/therapist')} className="nav-link text-white">
                             Therapist
-                        </a>
+                        </button>
                     </li>
                     <li className="text-nav">
-                        <a href="/layanan" className="nav-link text-white">
+                        <button onClick={()=>history.push('/layanan')} className="nav-link text-white">
                             Layanan
-                        </a>
+                        </button>
                     </li>
                 </ul>
             </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Sidebar from '../component/Sidebar'
 import AdminBar from '../component/AdminBar'
 import '../style/layananupdate.css'
-import { Form, Container, Col, Row, Button, Image } from 'react-bootstrap'
+import { Form, Container, Col, Row, Button } from 'react-bootstrap'
 import { useParams } from 'react-router-dom'
 import { useQuery, useMutation } from '@apollo/client'
 import { GET_LAYANAN_BY_ID } from '../store/queries'
@@ -28,10 +28,6 @@ function LayananUpdate() {
 
     if (errorUpdate) {
         return <p>error...</p>
-    }
-
-    if (loadingUpdate) {
-        return <Loading></Loading>
     }
 
     const handleChange = (e) => {
@@ -68,15 +64,16 @@ function LayananUpdate() {
             <div className="title">
                 <h2>Layanan</h2>
             </div>
-            {loadingUpdate?
-            <Loading/>
-            :
+
             <div className="container-tambah">
-            <Form style={{ padding: '3vh' }} onSubmit={editLayanan}>
-                <Container
-                // style={{ display: 'inline'}}
-                >
-                    {/* <Container
+                {loadingUpdate ?
+                    <Loading style={{marginRight: '40vw', marginTop:'30vh', position:'absolute'}}/>
+                    :
+                    <Form style={{ padding: '3vh' }} onSubmit={editLayanan}>
+                        <Container
+                        // style={{ display: 'inline'}}
+                        >
+                            {/* <Container
                         style={{
                             // display: 'inline-block', 
                             width: '180px'
@@ -87,40 +84,41 @@ function LayananUpdate() {
                         </Col>
                     </Container> */}
 
-                    <div style={{ marginTop: '10px' }}>
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column sm={2} className="label-pertama">Nama</Form.Label>
-                            <Col className="form-pertama" sm={5}>
-                                <Form.Control type="text" placeholder={nama} name="namaKosong" value={state.namaKosong} onChange={handleChange}></Form.Control>
-                            </Col>
-                        </Form.Group>
+                            <div style={{ marginTop: '10px' }}>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Form.Label column sm={2} className="label-pertama">Nama</Form.Label>
+                                    <Col className="form-pertama" sm={5}>
+                                        <Form.Control type="text" placeholder={nama} name="namaKosong" value={state.namaKosong} onChange={handleChange}></Form.Control>
+                                    </Col>
+                                </Form.Group>
 
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column sm={2} className="label-kedua">Harga</Form.Label>
-                            <Col className="form-kedua" sm={5}>
-                                <Form.Control type="number" placeholder={harga} name="hargaKosong" value={state.hargaKosong} onChange={handleChange}></Form.Control>
-                            </Col>
-                        </Form.Group>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Form.Label column sm={2} className="label-kedua">Harga</Form.Label>
+                                    <Col className="form-kedua" sm={5}>
+                                        <Form.Control type="number" placeholder={harga} name="hargaKosong" value={state.hargaKosong} onChange={handleChange}></Form.Control>
+                                    </Col>
+                                </Form.Group>
 
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label column sm={2} className="label-kedua">Deskripsi</Form.Label>
-                            <Col className="form-kedua" sm={5}>
-                                <Form.Control as="textarea" rows={3} placeholder={deskripsi} name="deskripsi" value={state.deskripsi} onChange={handleChange}></Form.Control>
-                            </Col>
-                        </Form.Group>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Form.Label column sm={2} className="label-kedua">Deskripsi</Form.Label>
+                                    <Col className="form-kedua" sm={5}>
+                                        <Form.Control as="textarea" rows={3} placeholder={deskripsi} name="deskripsi" value={state.deskripsi} onChange={handleChange}></Form.Control>
+                                    </Col>
+                                </Form.Group>
 
-                        <Form.Group as={Row} className="mb-3">
-                            <Col style={{ marginLeft: '14.5vw' }} sm={{ span: 10, offset: 2 }}>
-                                <Button style={{ background: '#0E483F' }} onClick={editLayanan}>Update</Button>
-                            </Col>
-                        </Form.Group>
-                    </div>
-                </Container>
+                                <Form.Group as={Row} className="mb-3">
+                                    <Col style={{ marginLeft: '14.5vw' }} sm={{ span: 10, offset: 2 }}>
+                                        <Button style={{ background: '#0E483F' }} onClick={editLayanan}>Update</Button>
+                                    </Col>
+                                </Form.Group>
+                            </div>
+                        </Container>
 
-            </Form>
-        </div>
+                    </Form>
+                }
+            </div>
 
-            }
+
         </div>
     )
 }

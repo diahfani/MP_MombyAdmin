@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { Container } from 'react-bootstrap'
-import { Image } from 'react-bootstrap'
+// import { Image } from 'react-bootstrap'
 import AdminBar from '../component/AdminBar'
 import { useParams } from 'react-router-dom'
 import { GET_THERAPIST_BY_ID } from '../store/queries'
@@ -77,11 +77,14 @@ function TherapistUpdate() {
             <div className="title">
                 <h2>Therapist</h2>
             </div>
+            {/* {loadingUpdate?
+            <Loading style={{marginRight: '40vw', marginTop:'30vh', position:'absolute'}}/>
+            : */}
+            <div className="container-tambah">
             {loadingUpdate?
             <Loading style={{marginRight: '40vw', marginTop:'30vh', position:'absolute'}}/>
-            :
-            <div className="container-tambah">
-            <Form style={{ padding: '3vh' }} onSubmit={editTherapist}>
+        :
+        <Form style={{ padding: '3vh' }} onSubmit={editTherapist}>
                 <Container
                 // style={{ display: 'inline'}}
                 >
@@ -137,16 +140,18 @@ function TherapistUpdate() {
 
                         <Form.Group as={Row} className="mb-3">
                             <Col style={{ marginLeft: '14.5vw' }} sm={{ span: 10, offset: 2 }}>
-                                <Button style={{ background: '#0E483F' }} onClick={editTherapist} to="/therapist">Update</Button>
+                                <Button style={{ background: '#0E483F' }} onClick={editTherapist}>Update</Button>
                             </Col>
                         </Form.Group>
                     </div>
                 </Container>
 
             </Form>
+        }
+            
         </div>
 
-            }
+            {/* } */}
         </div>
     )
 }

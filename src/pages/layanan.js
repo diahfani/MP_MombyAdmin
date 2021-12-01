@@ -2,7 +2,7 @@ import React from 'react'
 import AdminBar from '../component/AdminBar'
 import Sidebar from '../component/Sidebar'
 import '../style/layanan.css'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import LayananList from '../component/LayananList'
 import { Row } from 'react-bootstrap'
 import { useSubscription, useMutation } from '@apollo/client'
@@ -11,6 +11,7 @@ import Loading from '../component/loading'
 import { LAYANAN_SUBSCRIPTION } from '../store/subscription'
 
 function Layanan() {
+    const history = useHistory()
     const {data, loading, error} = useSubscription(LAYANAN_SUBSCRIPTION)
     const [deleteLayanan, {loading:loadingDelete}] = useMutation(DELETE_LAYANAN)
 
@@ -31,12 +32,12 @@ function Layanan() {
             </div>
             <div className="tambah-button">
                 <Link to="/tambah-layanan">
-                    <span className="bttn">Tambah</span>
+                    <span className="bttn" onClick={()=> history.push('/tambah-therapist')}>Tambah</span>
                 </Link>
             </div>
             <div className="card-layanan" style={{ display: 'flex', justifyContent:'center'}}>
             <Row style={{width:'900px'}}>
-                {loading?
+                {loading || loadingDelete?
                 <Loading/>
                 :
                 data?.mini_project_service?.map(item => (

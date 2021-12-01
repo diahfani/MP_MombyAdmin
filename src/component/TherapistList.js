@@ -1,9 +1,10 @@
 import '../style/therapistlist.css'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 
 
 export default function TherapistList(props) {
+    const history = useHistory()
     const { id, nama, nohp, status, umur, domisili, foto, updated_at, created_at} = props.data
 
     console.log(foto)
@@ -33,7 +34,9 @@ export default function TherapistList(props) {
                                 <span className="card-text" style={{ margin: '8px' }}>Status :</span>
                                 <span className="card-text-status">{checkstatus(status)}</span>
                                 <Link to={`/update-therapist/${id}`} data={props.data}>
-                                    <span className="edit-button">Edit</span>
+                                    <span className="edit-button" data={props.data} 
+                                    // onClick={()=>history.push({`/update-therapist/${id}`})}
+                                    >Edit</span>
                                 </Link>
                                 <span onClick={()=> props.hapusTherapist(id)} className="delete-button">Hapus</span>
                             </div>
