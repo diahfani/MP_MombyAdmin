@@ -1,6 +1,6 @@
 import { Container } from 'react-bootstrap'
 import image from '../images/2853458.jpg'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import '../style/login.css'
 import { useHistory } from 'react-router-dom';
 import { LOGIN_ADMIN } from '../store/queries';
@@ -29,7 +29,7 @@ export default function Login(){
         
     }
 
-    const [error, seterror] = useState("")
+    // const [error, seterror] = useState("")
     const handleChange = (e) => {
         setstate({
             ...state,

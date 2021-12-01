@@ -2,12 +2,11 @@ import React from 'react'
 import { GrUserAdmin } from 'react-icons/gr'
 import {Nav, NavDropdown} from 'react-bootstrap'
 import '../style/adminbar.css'
-import { Link, useHistory } from 'react-router-dom'
-import { useAuth0 } from '@auth0/auth0-react'
-
+import { useHistory } from 'react-router-dom'
+// import { useAuth0 } from '@aut
 export default function AdminBar() {
     let history = useHistory()
-    const { logout } = useAuth0()
+    // const { logout } = useAuth0()
     return (
         <div>
             <div style={{ display:'flex', background: '#EAF6F5', borderRadius: '30px', textAlign: 'center', padding: '7px', width: '130px' }}>
