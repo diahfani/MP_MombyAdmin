@@ -3,19 +3,20 @@ import AdminBar from '../component/AdminBar'
 import '../style/dashboard.css'
 import { CardTotalTherapist, CardTotalLayanan, CardJumlahReservasi, ListTabelTherapist, ListTabelLayanan } from '../component/CardDashboard'
 import { Row, Col } from 'react-bootstrap'
-import { GET_THERAPIST, GET_LAYANAN, TOTAL_LAYANAN, TOTAL_THERAPIST } from '../store/queries'
-import { useQuery } from '@apollo/client'
+// import { GET_THERAPIST, GET_LAYANAN, TOTAL_LAYANAN, TOTAL_THERAPIST } from '../store/queries'
+import { useQuery, useSubscription } from '@apollo/client'
 import { Table } from 'react-bootstrap'
+import { LAYANAN_SUBSCRIPTION, THERAPIST_SUBSCRIPTION, TOTAL_LAYANAN, TOTAL_THERAPIST } from '../store/subscription'
 import Loading from '../component/loading'
 // import { useAuth0 } from '@auth0/auth0-react'
 // import ListTabelTherapist from '../component/CardDashboard'
 
 export default function Dashboard() {
     
-    const { data: datatherapist, loading: loadingtherapist } = useQuery(GET_THERAPIST)
-    const { data: datalayanan, loading: loadinglayanan } = useQuery(GET_LAYANAN)
-    const { data: totalLayanan, loading: loadingTotallayanan } = useQuery(TOTAL_LAYANAN)
-    const { data: totalTherapist, loading: loadingTotalTherapist } = useQuery(TOTAL_THERAPIST)
+    const { data: datatherapist, loading: loadingtherapist } = useSubscription(THERAPIST_SUBSCRIPTION)
+    const { data: datalayanan, loading: loadinglayanan } = useSubscription(LAYANAN_SUBSCRIPTION)
+    const { data: totalLayanan, loading: loadingTotallayanan } = useSubscription(TOTAL_LAYANAN)
+    const { data: totalTherapist, loading: loadingTotalTherapist } = useSubscription(TOTAL_THERAPIST)
     // const rowCount = document.getElementById('table-id').rows.length
     // function HitungRows() {
     //     let table = document.getElementById('table-id')

@@ -28,4 +28,23 @@ subscription layananSubscription {
     }
   }`
 
-  export { THERAPIST_SUBSCRIPTION, LAYANAN_SUBSCRIPTION }
+  const TOTAL_LAYANAN = gql`
+  subscription TotalLayanan {
+    mini_project_service_aggregate {
+      aggregate {
+        count(columns: id)
+      }
+    }
+  }
+  `
+  const TOTAL_THERAPIST = gql`
+  subscription TotalTherapist {
+    mini_project_therapist_aggregate {
+      aggregate {
+        count(columns: id)
+      }
+    }
+  }
+  `
+
+  export { THERAPIST_SUBSCRIPTION, LAYANAN_SUBSCRIPTION, TOTAL_LAYANAN, TOTAL_THERAPIST }
